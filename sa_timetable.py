@@ -228,10 +228,41 @@ if __name__ == "__main__":
 
     # --- Copy and edit below this line ---
 
-    # tt2, clashes2, cl2, tl2 = run_sa(
-    #     initial_temp=100.0, cooling_rate=0.80,    # <- change this
-    #     min_temp=0.1, max_iterations=5000, seed=42
-    # )
-    # print_timetable(tt2)
-    # print(f"  Final clashes : {clashes2}")
-    # save_plot(cl2, tl2, "plots/experiment_2a.png", "cooling_rate=0.80")   # <- change filename
+    # Experiment 2a
+    print("=" * 48)
+    print("  EXPERIMENT 2a - cooling_rate = 0.80")
+    print("=" * 48)
+    tt2a, clashes2a, cl2a, tl2a = run_sa(
+        initial_temp=100.0, cooling_rate=0.80,
+        min_temp=0.1, max_iterations=5000, seed=42
+    )
+    print_timetable(tt2a)
+    print(f"  Iterations     : {len(cl2a)}")
+    print(f"  Final clashes  : {clashes2a}")
+    save_plot(cl2a, tl2a, "plots/experiment_2a.png", "cooling_rate=0.80")
+
+    # Experiment 2b
+    print("=" * 48)
+    print("  EXPERIMENT 2b - cooling_rate = 0.95")
+    print("=" * 48)
+    tt2b, clashes2b, cl2b, tl2b = run_sa(
+        initial_temp=100.0, cooling_rate=0.95,
+        min_temp=0.1, max_iterations=5000, seed=42
+    )
+    print_timetable(tt2b)
+    print(f"  Iterations     : {len(cl2b)}")
+    print(f"  Final clashes  : {clashes2b}")
+    save_plot(cl2b, tl2b, "plots/experiment_2b.png", "cooling_rate=0.95")
+
+    # Experiment 2c
+    print("=" * 48)
+    print("  EXPERIMENT 2c - cooling_rate = 0.995")
+    print("=" * 48)
+    tt2c, clashes2c, cl2c, tl2c = run_sa(
+        initial_temp=100.0, cooling_rate=0.995,
+        min_temp=0.1, max_iterations=5000, seed=42
+    )
+    print_timetable(tt2c)
+    print(f"  Iterations     : {len(cl2c)}")
+    print(f"  Final clashes  : {clashes2c}")
+    save_plot(cl2c, tl2c, "plots/experiment_2c.png", "cooling_rate=0.995")
