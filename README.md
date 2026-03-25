@@ -22,14 +22,14 @@ Open `sa_timetable.py` and read through it. Then answer these questions.
 
 **Q1. What does `count_clashes()` measure? What value means a perfect timetable?**
 
-```text
-`count_clashes()` measures the total number of times a student has two exams scheduled in the same time slot across all students. A value of 0 means a perfect timetable with zero clashes.
+```
+count_clashes() measures the number of clashes in the timetable, where a clash occurs when a student has two exams scheduled in the same time slot. A value of 0 means a perfect timetable.
 ```
 
 **Q2. What does `generate_neighbor()` do? How is the new timetable different from the current one?**
 
-```text
-`generate_neighbor()` creates a neighboring timetable by randomly selecting one exam and moving it to a different, randomly chosen time slot. The new timetable is identical to the current one except for this single exam's new slot assignment.
+```
+generate_neighbor() creates a new timetable by randomly selecting one exam and assigning it to a different time slot. The new timetable differs from the current one by only one exam’s slot.
 ```
 
 **Q3. In `run_sa()`, there is this line:**
@@ -38,8 +38,8 @@ if delta < 0 or random.random() < math.exp(-delta / T):
 ```
 **What does this line decide? Why does SA sometimes accept a worse solution?**
 
-```text
-This line decides whether to accept the newly generated timetable. It always accepts a better solution (where `delta < 0`), but also accepts a worse solution with a probability based on the current temperature to avoid getting trapped in local optima.
+```
+This line decides whether to accept the new solution. If the new solution is better (delta < 0), it is always accepted. If it is worse, it may still be accepted with a probability based on temperature, which helps the algorithm escape local optima.
 ```
 
 ---
@@ -61,7 +61,7 @@ python sa_timetable.py
 | Did SA reach 0 clashes? (Yes / No) | No |
 
 **Copy the printed timetable output here:**
-```text
+```
   Final Timetable
 ------------------------------------------
   Slot 1:  Geography
@@ -75,8 +75,8 @@ python sa_timetable.py
 
 **Look at `plots/experiment_1.png` and describe what you see (2–3 sentences).**  
 *Where does the biggest drop in clashes happen? Does the curve flatten out?*
-```text
-The biggest drop in clashes happens very early in the iterations while the temperature is still high. After the initial rapid drop, the curve flattens out and only makes minor, occasional improvements until the temperature gets too low.
+```
+The biggest drop in clashes happens in the early iterations when the temperature is high. As the temperature decreases, the curve gradually flattens and improvements become less frequent.
 ```
 
 ---
@@ -97,13 +97,13 @@ Save plots as `experiment_2a.png`, `experiment_2b.png`, `experiment_2c.png`.
 
 **Compare the three plots. What do you notice about how fast vs slow cooling affects the result? (3–4 sentences)**  
 *Hint: Fast cooling = temperature drops quickly. Does it have time to explore well?*
-```text
-Fast cooling (0.80) drops the temperature so rapidly that the algorithm only completes 31 iterations and gets stuck in a poor local minimum with 8 clashes. Slower cooling rates (0.95 and 0.995) give the algorithm more time to explore the search space, allowing it to escape local optima and reach a much better final state of 3 clashes. However, the slowest cooling rate (0.995) takes significantly more iterations.
+```
+With fast cooling (0.80), the temperature drops quickly and the algorithm converges early to a poor solution. With slower cooling (0.95 and 0.995), the algorithm explores more and finds better solutions with fewer clashes, although it takes more iterations.
 ```
 
 **Which cooling_rate gave the best result? Why do you think that is?**
-```text
-Both 0.95 and 0.995 achieved the best result of 3 clashes, but 0.95 is more efficient because it required far fewer iterations (135 vs 1379) to reach the same quality of solution. The 0.80 rate decayed too fast to search effectively.
+```
+The cooling rate 0.95 gives the best result because it balances exploration and convergence, achieving a low number of clashes in fewer iterations compared to 0.995.
 ```
 
 ---
@@ -118,8 +118,8 @@ Both 0.95 and 0.995 achieved the best result of 3 clashes, but 0.95 is more effi
 | 2 — Cooling rate | cooling_rate = 0.95 | 3 | A moderately slow cooling rate offers the best balance between fast execution and good solution quality. |
 
 **In your own words — what is the most important thing you learned about Simulated Annealing from these experiments? (3–5 sentences)**
-```text
-The most important thing I learned is that the cooling schedule heavily dictates the performance of the Simulated Annealing algorithm. If the temperature drops too quickly, the algorithm will prematurely converge on a poor solution because it stops exploring. However, finding the right "sweet spot" (like 0.95) can dramatically reduce computational time while maintaining solution quality compared to excessively slow options.
+```
+The most important thing I learned is that the cooling rate controls the balance between exploration and convergence in simulated annealing. If cooling is too fast, the algorithm may get stuck in a local optimum. If it is too slow, it takes more time but finds better solutions.
 ```
 
 ---
